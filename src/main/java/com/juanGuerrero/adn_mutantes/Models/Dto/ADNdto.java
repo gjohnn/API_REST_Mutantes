@@ -12,6 +12,7 @@ import java.sql.Timestamp;
 public class ADNdto {
     public String name;
     public String[] adn;
+    public boolean isMutant;
     private Timestamp created_at;
     private Timestamp updated_at;
     private Timestamp deleted_at;

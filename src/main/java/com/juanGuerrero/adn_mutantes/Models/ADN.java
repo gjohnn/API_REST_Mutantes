@@ -2,6 +2,7 @@ package com.juanGuerrero.adn_mutantes.Models;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -14,6 +15,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@Builder
 public class ADN {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
