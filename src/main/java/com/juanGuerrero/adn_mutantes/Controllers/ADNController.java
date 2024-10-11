@@ -18,7 +18,7 @@ public class ADNController {
 
     @GetMapping("")
     public ResponseEntity<?> index() {
-        return ResponseEntity.ok().body("RATIO: " + adnService.getAllAdnsRatio());
+        return ResponseEntity.ok().body(adnService.getAllAdnsRatio().toString());
     }
 
     @PostMapping("")

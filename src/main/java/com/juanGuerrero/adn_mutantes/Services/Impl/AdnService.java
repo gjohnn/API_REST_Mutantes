@@ -4,6 +4,7 @@ import com.juanGuerrero.adn_mutantes.Models.ADN;
 import com.juanGuerrero.adn_mutantes.Models.Dto.ADNdto;
 import com.juanGuerrero.adn_mutantes.Repositories.AdnRepository;
 import com.juanGuerrero.adn_mutantes.Services.IAdnService;
+import com.juanGuerrero.adn_mutantes.Tools.RatioResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -61,15 +62,18 @@ public class AdnService implements IAdnService {
     }
 
     @Override
-    public Double getAllAdnsRatio() {
+    public RatioResponse getAllAdnsRatio() {
         long totalAdns = adnRepository.count();
         long totalMutants = adnRepository.countByIsMutant(true);
 
         if (totalMutants == 0) {
-            return 0.0; // Evitar la division por 0
+            throw new RuntimeException("Can't divide by zero"); // Evitar la division por 0
         }
-
-        return (double) totalMutants / (double) totalAdns;
+        return RatioResponse.builder()
+                .count_adns(totalAdns)
+                .count_mutants(totalMutants)
+                .ratio((double) totalMutants / (double) totalAdns) // Convertir a double para obtener el valor decimal
+                .build();
     }
 
     public static boolean checkSequence(String[] dna, int row, int col, int rowDir, int colDir) {
