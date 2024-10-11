@@ -6,11 +6,9 @@ import com.juanGuerrero.adn_mutantes.Repositories.AdnRepository;
 import com.juanGuerrero.adn_mutantes.Services.IAdnService;
 import com.juanGuerrero.adn_mutantes.Tools.RatioResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor

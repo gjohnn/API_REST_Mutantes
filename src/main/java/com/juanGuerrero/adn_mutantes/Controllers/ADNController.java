@@ -31,7 +31,7 @@ public class ADNController {
             return ResponseEntity.ok().body(message);
         } catch (Exception e) {
             ErrorResponse errorResponse = ErrorResponse.builder()
-                    .status(404)
+                    .status(403)
                     .message(e.getMessage())
                     .stackTrace(e.getStackTrace())
                     .build();
