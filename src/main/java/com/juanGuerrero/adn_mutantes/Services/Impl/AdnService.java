@@ -5,15 +5,23 @@ import com.juanGuerrero.adn_mutantes.Models.Dto.ADNdto;
 import com.juanGuerrero.adn_mutantes.Repositories.AdnRepository;
 import com.juanGuerrero.adn_mutantes.Services.IAdnService;
 import com.juanGuerrero.adn_mutantes.Tools.RatioResponse;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 
 @Service
-@RequiredArgsConstructor
 public class AdnService implements IAdnService {
+
     private final AdnRepository adnRepository;
+
+    // Constructor con la inyección del repositorio
+    @Autowired
+    public AdnService(AdnRepository adnRepository) {
+        this.adnRepository = adnRepository;
+    }
 
     @Override
     public void Save(ADNdto adnDto) {
@@ -29,7 +37,24 @@ public class AdnService implements IAdnService {
 
     @Override
     public boolean isMutant(String[] dna) {
+        if (dna == null) {
+            throw new IllegalArgumentException("El array no debe ser null");
+        }
+        if (dna.length == 0) {
+            throw new IllegalArgumentException("El array no debe estar vacío");
+        }
         int n = dna.length;
+        for (String fila : dna) {
+            if (fila == null) {
+                throw new IllegalArgumentException("El array contiene valores null");
+            }
+            if (fila.length() != n) {
+                throw new IllegalArgumentException("El array debe ser NxN");
+            }
+            if (!fila.matches("[ACTG]+")) {
+                throw new IllegalArgumentException("El array contiene caracteres no permitidos");
+            }
+        }
         int marcoSkip = 4;
         for (int i = 0; i < dna.length; i++) {
             for (int j = 0; j < dna.length; j++) {
