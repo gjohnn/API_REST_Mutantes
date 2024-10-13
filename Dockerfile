@@ -5,11 +5,11 @@ FROM gradle:8.10.0-jdk17 AS build
 WORKDIR /app
 
 # Copiar archivos de Gradle y el código fuente
-COPY build.gradle settings.gradle gradlew ./
+COPY build.gradle.kts settings.gradle.kts gradlew ./
 COPY gradle ./gradle
 COPY src ./src
 
-# Construir el proyecto
+# Construir el proyecto (puedes ajustar el comando si necesitas otros pasos)
 RUN ./gradlew build -x test
 
 # Etapa 2: Crear la imagen final para ejecución
