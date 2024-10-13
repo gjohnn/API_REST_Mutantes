@@ -2,6 +2,7 @@ package com.juanGuerrero.adn_mutantes;
 
 import com.juanGuerrero.adn_mutantes.Repositories.AdnRepository;
 import com.juanGuerrero.adn_mutantes.Services.Impl.AdnService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -15,9 +16,17 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @SpringBootTest
 class AdnMutantesApplicationTests {
 
-    @Autowired
-    private AdnService adnService;
+    @Mock
+    private AdnRepository adnRepository;  // Mock del repositorio
 
+    @InjectMocks
+    private AdnService adnService;  // Inyectar el mock en el servicio
+
+    @BeforeEach
+    public void setUp() {
+        MockitoAnnotations.openMocks(this);  // Inicializar los mocks antes de cada test
+    }
+    
     @Test
     public void testArrayVacio() {
         String[] adn = {};
@@ -26,7 +35,6 @@ class AdnMutantesApplicationTests {
         });
         assertEquals("El array no debe estar vacío", exception.getMessage());
     }
-
     @Test
     public void testArrayNxM() {
         String[] adn = {
@@ -38,7 +46,6 @@ class AdnMutantesApplicationTests {
         });
         assertEquals("El array debe ser NxN", exception.getMessage());
     }
-
     @Test
     public void testArrayConNumeros() {
         String[] adn = {
@@ -52,7 +59,6 @@ class AdnMutantesApplicationTests {
         });
         assertEquals("El array contiene caracteres no permitidos", exception.getMessage());
     }
-
     @Test
     public void testRecibirNull() {
         String[] adn = null;
@@ -61,7 +67,6 @@ class AdnMutantesApplicationTests {
         });
         assertEquals("El array no debe ser null", exception.getMessage());
     }
-
     @Test
     public void testArrayNxNDeNulls() {
         String[] adn = {
@@ -72,7 +77,6 @@ class AdnMutantesApplicationTests {
         });
         assertEquals("El array contiene valores null", exception.getMessage());
     }
-
     @Test
     public void testArrayConLetrasDistintas() {
         String[] adn = {
@@ -87,4 +91,3 @@ class AdnMutantesApplicationTests {
         assertEquals("El array contiene caracteres no permitidos", exception.getMessage());
     }
 }
-
