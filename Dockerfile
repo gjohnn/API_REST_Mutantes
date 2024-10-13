@@ -9,7 +9,10 @@ COPY build.gradle.kts settings.gradle.kts gradlew ./
 COPY gradle ./gradle
 COPY src ./src
 
-# Construir el proyecto (puedes ajustar el comando si necesitas otros pasos)
+# Otorgar permisos de ejecución a gradlew
+RUN chmod +x ./gradlew
+
+# Construir el proyecto
 RUN ./gradlew build
 
 # Etapa 2: Crear la imagen final para ejecución
