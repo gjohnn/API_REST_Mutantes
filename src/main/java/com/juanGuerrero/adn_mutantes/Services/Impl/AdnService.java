@@ -6,22 +6,15 @@ import com.juanGuerrero.adn_mutantes.Repositories.AdnRepository;
 import com.juanGuerrero.adn_mutantes.Services.IAdnService;
 import com.juanGuerrero.adn_mutantes.Tools.RatioResponse;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 
 @Service
+@AllArgsConstructor
 public class AdnService implements IAdnService {
 
     private final AdnRepository adnRepository;
-
-    // Constructor con la inyección del repositorio
-    @Autowired
-    public AdnService(AdnRepository adnRepository) {
-        this.adnRepository = adnRepository;
-    }
 
     @Override
     public void Save(ADNdto adnDto) {

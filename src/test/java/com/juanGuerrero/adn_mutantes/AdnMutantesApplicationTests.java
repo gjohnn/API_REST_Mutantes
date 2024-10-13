@@ -15,16 +15,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @SpringBootTest
 class AdnMutantesApplicationTests {
 
-
-    @Mock
-    private AdnRepository adnRepository;  // Mock del repositorio
-
-    @InjectMocks
-    private AdnService adnService;  // Inyectar el mock en el servicio
-
-    public AdnMutantesApplicationTests() {
-        MockitoAnnotations.openMocks(this);  // Inicializar los mocks
-    }
+    @Autowired
+    private AdnService adnService;
 
     @Test
     public void testArrayVacio() {
