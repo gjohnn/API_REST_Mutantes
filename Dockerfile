@@ -10,7 +10,7 @@ COPY gradle ./gradle
 COPY src ./src
 
 # Construir el proyecto (puedes ajustar el comando si necesitas otros pasos)
-RUN ./gradlew build -x test
+RUN ./gradlew build
 
 # Etapa 2: Crear la imagen final para ejecución
 FROM eclipse-temurin:17-jdk-alpine
