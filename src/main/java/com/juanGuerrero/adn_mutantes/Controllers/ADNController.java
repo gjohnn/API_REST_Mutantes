@@ -16,7 +16,7 @@ public class ADNController {
 
     private final AdnService adnService;
 
-    @GetMapping("")
+    @GetMapping("/stats")
     public ResponseEntity<?> index() {
         return ResponseEntity.ok().body(adnService.getAllAdnsRatio().toString());
     }
